@@ -13,7 +13,7 @@ fn main() {
 
   /* Nothing below here is configurable */
 
-  /* Keep track of how many generations it takes to obtain 'ideal'! */
+  /* Keep track of how many generations it takes to evolve into ideal_genome */
   let mut gens: uint =0;
 
   /* Genomes for our mom, dad, and primordial ooze */
@@ -36,10 +36,7 @@ fn main() {
     ooz_fit = fitness(ooz_genome, ideal_genome);
 
     /* Print this genome */
-    for ooz_genome.each |c| {
-      io::print(fmt!("%c", *c));
-    }
-    io::println(fmt!(" (fitness: %f)", ooz_fit));
+    print(ooz_genome, ooz_fit);
 
     /* If our ooze has a high fitness, make it breed next generation */
     if ooz_fit >=mom_fit {
@@ -57,8 +54,8 @@ fn main() {
 fn fitness(ooz_genome: &[char], ideal_genome: &[char]) -> float {
   let     ideal_fit    =12.;
   let mut ooz_fit      =0.;
-  for ooz_genome.eachi |k, v| {
-    if ideal_genome[k] ==*v {
+  for ooz_genome.eachi |gene, ideal_gene| {
+    if ideal_genome[gene] ==*ideal_gene {
       ooz_fit +=1.;
     }
   }
@@ -81,4 +78,11 @@ fn breed(genome_a: &[char], genome_b: &[char]) -> ~[char] {
     i +=1;
   }
   child_genome
+}
+
+fn print(genome: &[char], fit: float) {
+  for genome.each |c| {
+    io::print(fmt!("%c", *c));
+  }
+  io::println(fmt!(" (fitness: %f)", fit));
 }
