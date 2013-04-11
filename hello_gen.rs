@@ -28,9 +28,9 @@ fn main() {
 
   while ooz_fit !=1. {
     ooz_genome = breed(mom_genome, dad_genome);
-    for ooz_genome.eachi |k, v| {
+    for ooz_genome.each_mut |gene| {
       if rand::random() %100 <=(mutation_rate *100. as uint) {
-        ooz_genome[k] = mutate();
+        *gene = mutate();
       }
     }
     ooz_fit = fitness(ooz_genome, ideal_genome);
@@ -54,8 +54,8 @@ fn main() {
 fn fitness(ooz_genome: &[char], ideal_genome: &[char]) -> float {
   let     ideal_fit    =12.;
   let mut ooz_fit      =0.;
-  for ooz_genome.eachi |k, v| {
-    if ooz_genome[k] ==ideal_genome[k] {
+  for vec::each2(ooz_genome, ideal_genome) |ooz_gene, ideal_gene| {
+    if ooz_gene ==ideal_gene {
       ooz_fit +=1.;
     }
   }
