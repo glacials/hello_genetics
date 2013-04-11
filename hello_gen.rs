@@ -8,7 +8,7 @@ fn main() {
   let ideal_genome =str::to_chars("Hello world!");
 
   /* How often should mutations happen? (calculated per gene, not per genome)
-  /* 0 means never, 1 means always */
+   * 0 means never, 1 means always */
   let mutation_rate =0.05;
 
   /* Nothing below here is configurable */
@@ -51,6 +51,8 @@ fn main() {
   io::println(fmt!("Took %u generations", gens));
 }
 
+/* Returns a fitness for ooz_genome when compared to ideal_genome, from 0.0
+ * (least fit) to 1.0 (most fit). */
 fn fitness(ooz_genome: &[char], ideal_genome: &[char]) -> float {
   let     ideal_fit    =12.;
   let mut ooz_fit      =0.;
@@ -62,10 +64,12 @@ fn fitness(ooz_genome: &[char], ideal_genome: &[char]) -> float {
   ooz_fit /ideal_fit
 }
 
+/* Generates a random gene (char). */
 fn mutate() -> char {
   rand::Rng().gen_char_from("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz `1234567890!@#$%^&*()_+")
 }
 
+/* Returns a genome comprised of half of genome_a and half of genome_b. */
 fn breed(genome_a: &[char], genome_b: &[char]) -> ~[char] {
   let mut i =0;
   let mut child_genome: ~[char] =str::to_chars("            ");
@@ -80,6 +84,7 @@ fn breed(genome_a: &[char], genome_b: &[char]) -> ~[char] {
   child_genome
 }
 
+/* Prints an entire genome and its fitness level. */
 fn print(genome: &[char], fit: float) {
   for genome.each |c| {
     io::print(fmt!("%c", *c));
