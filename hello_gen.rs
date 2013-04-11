@@ -11,8 +11,10 @@ fn main() {
   /* 0 means never, 1 means always */
   let mutation_rate =0.05;
 
+  /* Nothing below here is configurable */
+
   /* Keep track of how many generations it takes to obtain 'ideal'! */
-  let mut gens: uint = 0;
+  let mut gens: uint =0;
 
   /* Genomes for our mom, dad, and primordial ooze */
   let mut mom_genome: ~[char] =str::to_chars("            ");
@@ -24,7 +26,7 @@ fn main() {
   let mut dad_fit =0.;
   let mut ooz_fit =0.;
 
-  while ooz_fit != 1. {
+  while ooz_fit !=1. {
     ooz_genome = breed(mom_genome, dad_genome);
     for ooz_genome.eachi |k, v| {
       if rand::random() %100 <=(mutation_rate *100. as uint) {
