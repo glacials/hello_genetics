@@ -54,8 +54,8 @@ fn main() {
 fn fitness(ooz_genome: &[char], ideal_genome: &[char]) -> float {
   let     ideal_fit    =12.;
   let mut ooz_fit      =0.;
-  for ooz_genome.eachi |gene, ideal_gene| {
-    if ideal_genome[gene] ==*ideal_gene {
+  for ooz_genome.eachi |k, v| {
+    if ooz_genome[k] ==ideal_genome[k] {
       ooz_fit +=1.;
     }
   }
