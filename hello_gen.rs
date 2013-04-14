@@ -8,7 +8,7 @@ fn main() {
 
   /* What string do we want to evolve into? Each character is a gene.
    * For now, this must be exactly 12 characters. */
-  let ideal_genome: genome =str::to_chars("Hello world!");
+  let ideal_genome =str::to_chars("Hello world!");
 
   /* How often should mutations happen? (calculated per gene, not per genome)
    * 0 means never, 1 means always */
@@ -20,8 +20,8 @@ fn main() {
   let mut gens: uint =0;
 
   /* Genomes for our mom, dad, and primordial ooze */
-  let mut mom_genome: genome = empty_genome.clone();
-  let mut dad_genome: genome = empty_genome.clone();
+  let mut mom_genome =empty_genome.clone();
+  let mut dad_genome =empty_genome.clone();
   let mut ooz_genome: genome;
 
   /* Fitness ratings ('ideal' fitness is 1.0) */
