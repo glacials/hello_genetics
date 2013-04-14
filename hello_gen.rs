@@ -1,25 +1,28 @@
 extern mod core;
 use core::rand::RngUtil;
 
+/* Type definition for our genome (a vector of characters) */
+type genome = ~[char];
+
 fn main() {
 
   /* What string do we want to evolve into? Each character is a gene.
    * For now, this must be exactly 12 characters. */
-  let ideal_genome =str::to_chars("Hello world!");
+  let ideal_genome: genome =str::to_chars("Hello world!");
 
   /* How often should mutations happen? (calculated per gene, not per genome)
    * 0 means never, 1 means always */
   let mutation_rate =0.05;
 
-  /* Nothing below here is configurable */
+  let empty_genome = str::to_chars("            ");
 
   /* Keep track of how many generations it takes to evolve into ideal_genome */
   let mut gens: uint =0;
 
   /* Genomes for our mom, dad, and primordial ooze */
-  let mut mom_genome: ~[char] =str::to_chars("            ");
-  let mut dad_genome: ~[char] =str::to_chars("            ");
-  let mut ooz_genome: ~[char];
+  let mut mom_genome: genome = empty_genome.clone();
+  let mut dad_genome: genome = empty_genome.clone();
+  let mut ooz_genome: genome;
 
   /* Fitness ratings ('ideal' fitness is 1.0) */
   let mut mom_fit =0.;
@@ -70,9 +73,9 @@ fn mutate() -> char {
 }
 
 /* Returns a genome comprised of half of genome_a and half of genome_b. */
-fn breed(genome_a: &[char], genome_b: &[char]) -> ~[char] {
+fn breed(genome_a: &[char], genome_b: &[char]) -> genome {
   let mut i =0;
-  let mut child_genome: ~[char] =str::to_chars("            ");
+  let mut child_genome =str::to_chars("            ");
   while i <12 {
     if i <12 /2 {
       child_genome[i] =genome_a[i];
@@ -85,8 +88,8 @@ fn breed(genome_a: &[char], genome_b: &[char]) -> ~[char] {
 }
 
 /* Prints an entire genome and its fitness level. */
-fn print(genome: &[char], fit: float) {
-  for genome.each |c| {
+fn print(g: &[char], fit: float) {
+  for g.each |c| {
     io::print(fmt!("%c", *c));
   }
   io::println(fmt!(" (fitness: %f)", fit));
