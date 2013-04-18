@@ -14,7 +14,7 @@ fn main() {
    * 0 means never, 1 means always */
   let mutation_rate =0.05;
 
-  let empty_genome = str::to_chars("            ");
+  let empty_genome =str::to_chars("            ");
 
   /* Keep track of how many generations it takes to evolve into ideal_genome */
   let mut gens: uint =0;
@@ -30,13 +30,13 @@ fn main() {
   let mut ooz_fit =0.;
 
   while ooz_fit !=1. {
-    ooz_genome = breed(mom_genome, dad_genome);
+    ooz_genome =breed(mom_genome, dad_genome);
     for ooz_genome.each_mut |gene| {
       if rand::random() %100 <=(mutation_rate *100. as uint) {
         *gene = mutate();
       }
     }
-    ooz_fit = fitness(ooz_genome, ideal_genome);
+    ooz_fit =fitness(ooz_genome, ideal_genome);
 
     /* Print this genome */
     print(ooz_genome, ooz_fit);
