@@ -1,3 +1,6 @@
+*Note: Rust has gone through a lot of changes since I wrote this, so `hello_genetics` currently doesn't compile. I haven't
+kept up with the changes much, but if you feel like fixing it, feel free. Otherwise, I'll get to it when I can! Thanks!*
+
 ## hello_genetics
 
 This is an implementation of "Hello world!" using a genetic algorithm. An
